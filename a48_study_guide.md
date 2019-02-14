@@ -38,14 +38,38 @@ int main()
   return 0;
 }
 ```
-### ```Strings in C```
+## String Operations 
 
+### Strings in C
 
 Recall that strings in C are not primitive. Strings are an **array of
 characters**, which is terminated with a **null character** ```\0```. You must
 end your strings with the null character or else you won't be able to perform
 operations like printf.
 
+`string.h` library
+
+`strcat`
+~~~c
+
+~~~
+
+
+`strncat`
+~~~c
+
+~~~
+
+
+`strcmp`
+~~~c
+
+~~~
+
+`strncmp`
+~~~c
+
+~~~
 ---
 
 ## Section 1: Pointers

@@ -1,17 +1,49 @@
-# CSCA48 Study Guide
+# CSC A48 Winter 2019 Term Test Study Guide
 
-<!--
-    I would like to keep this study guide interesting to read, so the students
-    actually enjoy reading it...
--->
-> Once you understand C and all its glory, you won't like going back to Python.
+## Section 0: Introduction to C and Basic Data Types
 
 
-## Section 0: Basic Data Types
+C is an <b> imperative </b> language.
+There is no interactive mode in C. All programs start at a function called  <b> main() </b>.
+Program can include and use code from <b> libraries </b>, similar to Python modules. Here is an example of the most famous program in C.
+
+```c
+// Allows you to use input and output command such as printf
+#include <stdio.h>
+
+int main()
+{
+  // end your print statement with a newline character
+  printf("HELLO WORLD\n");
+  // your main function must return 0 if successful
+  return 0;
+}
+```
+
+The fundamental data types supported by C are:
+`int` which is an integer number,
+`float/double`, a floating point number
+`char` which is one character and 
+`void` which represents no data type attached like `None` in Python.
+
+```c
+#include <stdio.h>
+
+int main()
+{
+  float my_float = 10.0;
+  int my_int = 3;
+  char my_char 'a';
+  printf("My variables are: %f, %d, %c \n", my_float, my_int, my_char);
+  return 0;
+}
+```
+### ```Strings in C```
 
 
+Recall that strings in C are not primitive. Strings are  an <b> array of characters </b>, which is terminated with a <b> null character </b> ```\0```. You must end your strings with the null character or else you won't be able to perform operations like printf.
 
-
+---
 
 ## Section 1: Pointers
 
@@ -68,6 +100,8 @@ distinguish the above ideas about copy on pass and copy on return leads to main
 source of confusion about pointers. People tend to think that pointers are
 passed to function in a special way - **they are not**. They are done in the
 exact same way an `int` or `char` etc. would be passed in.
+
+---
 
 ## Section 2: Linked Lists
 
@@ -176,7 +210,16 @@ int delete (Node** head, int v) {
     return 1;
 }
 ```
+### Exercises
 
+1. Write a function `void llreverse(Node** head)`, that reverses the linked
+   list rooted at `head`.
+2. 
 ---
 Questions, Comments and Suggestions can be directed to me at
 [david.yue@mail.utoronto.ca](mailto:david.yue@mail.utoronto.ca)
+
+We are also your CSC A48 Computer Science Representatives for AMACSS, feel free
+to ask course material questions through this email as well :)
+
+Requests to see this study guide in a different format are welcome :)

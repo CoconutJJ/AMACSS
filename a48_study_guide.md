@@ -2,10 +2,10 @@
 
 ## Section 0: Introduction to C and Basic Data Types
 
-
-C is an <b> imperative </b> language.
-There is no interactive mode in C. All programs start at a function called  <b> main() </b>.
-Program can include and use code from <b> libraries </b>, similar to Python modules. Here is an example of the most famous program in C.
+C is an **imperative** language. There is no interactive mode in C. All programs
+start at a function called  `main()`. Program can include and use code from
+**libraries**, similar to Python modules. Here is an example of the most famous
+program in C.
 
 ```c
 // Allows you to use input and output command such as printf
@@ -21,10 +21,10 @@ int main()
 ```
 
 The fundamental data types supported by C are:
-`int` which is an integer number,
-`float/double`, a floating point number
-`char` which is one character and 
-`void` which represents no data type attached like `None` in Python.
+1. `int` which is an integer number,
+2. `float/double`, a floating point number
+3. `char` which is one character and 
+4. `void` which represents no data type attached like `None` in Python.
 
 ```c
 #include <stdio.h>
@@ -41,7 +41,10 @@ int main()
 ### ```Strings in C```
 
 
-Recall that strings in C are not primitive. Strings are  an <b> array of characters </b>, which is terminated with a <b> null character </b> ```\0```. You must end your strings with the null character or else you won't be able to perform operations like printf.
+Recall that strings in C are not primitive. Strings are an **array of
+characters**, which is terminated with a **null character** ```\0```. You must
+end your strings with the null character or else you won't be able to perform
+operations like printf.
 
 ---
 
@@ -58,14 +61,38 @@ information around. In fact, to your computer, there is no difference between an
 `int` or `char` or even `char*` etc., they are simply a sequence of bits that
 are passed around in your machine. 
 
+
 <!-- Sounds a little philosophical...-->
 It is the human component and only this component that makes the decision that
-an `int` expresseses our idea of quantity or number and `char` expresses our    
+an `int` expresseses our idea of quantity or number and `char` expresses our
 idea of characters. If you were to "ask" your computer what is stored at a
 particular memory address, the response will always be "I don't know. Who
 cares?". The first byte at this location could be interpreted as a `char` or the
 first 4 or 8 bytes at the same location (depending on your machine) could be
 interpreted as an `int`, `char*` or any other data type. 
+
+We can let the compiler know we've decided to switch our interpretation of the
+data we stored in a variable. It's called casting
+~~~c
+int main(int argc, char ** argv) {
+    
+    char mem[] = "Hello World";
+    // creating a int pointer to the array allows us to use the same
+    // data, but interpreted differently.
+    int * p = (int*) &(mem[0]);
+    
+    printf("Size of Integer: %d bytes\n", sizeof(int));
+    printf("%d", *p);
+}
+~~~
+~~~
+$ gcc casting.c
+$ ./a.out
+Size of Integer: 4 bytes
+1819043144
+~~~
+> Note: Since the size of integer is only 4 bytes, not all of "Hello World" has
+been translated to a integer value. only the first 4 bytes.
 
 <!-- 
     Feels like I'm trying to introduce a new concept... probably shouldn't
@@ -99,7 +126,55 @@ stored as a local variable in the function (i.e your parameter). Failure to
 distinguish the above ideas about copy on pass and copy on return leads to main
 source of confusion about pointers. People tend to think that pointers are
 passed to function in a special way - **they are not**. They are done in the
-exact same way an `int` or `char` etc. would be passed in.
+exact same way an `int` or `char` etc. would be passed in. It's just that one has
+to realize its not what the pointer is pointing to that is passed, but the value
+of the pointer. (the memory address it holds)
+
+### Common Mistakes and Bugs
+
+**Uninitialized Pointer - Dereferenced before assignment**
+~~~ c
+int main(int argc, char ** argv) {
+    
+    int * p;
+
+    *p = 3; // BAD! p doesn't point to a valid location location in memory.
+            // Attempting to write will trigger SIGSEGV
+}
+~~~
+
+**Dangling Pointer - Access**
+~~~ c
+int main(int argc, char ** argv) {
+    
+    char * p = malloc(20); // allocate 20 bytes
+    strcpy(p, "hello");
+    ...
+    free(p);
+    strcat(p, "world"); // BAD! memory was already freed
+                        // Attempting to access will trigger SIGSEGV
+}
+~~~
+
+**Memory Leak**
+~~~ c
+int main(int argc, char ** argv) {
+    
+    char * p = malloc(20); // allocate 20 bytes
+    strcpy(p, "hello");
+    
+    char a[] = "Cake";
+
+    p = &(a[0]); // BAD! p was pointing to memory allocated on heap
+                 // reassignment of p now removes all references to that
+                 // memory location. cannot free.
+}
+~~~
+
+### Dereferencing a pointer and overwriting the value
+
+
+
 
 ---
 

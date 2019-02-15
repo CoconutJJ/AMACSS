@@ -49,19 +49,21 @@ operations like printf.
 
 `string.h` library
 
-`strcpy`
+#### `strcpy and strncpy`
 
 ~~~c
 char a[10], b[10];
-strcpy(a, "Hello")
-strcpy(b, a);
+strcpy(a, "Hello");
 printf(a);
-print(b);
+printf(b);
+printf("Copying first four letters of A to b");
+strncpy(b, a, 4);
+printf(b);
 ~~~
-#### Output
 ```
 Hello
 Hello
+Hell
 ```
 `strcat`
 ~~~c

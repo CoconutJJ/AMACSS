@@ -44,6 +44,9 @@ An indexable collection of data. Recall that you must declare:
 1. the size of the array
 2. what type the items are
 
+Unlike variables in python, you can't have items of different types in an array
+in C.
+
 ```c
 // initializes an empty array of 5 integers. 
 int numbers[5];
@@ -54,18 +57,30 @@ int numbers3d[2][3];
 ```
 ```c
 int nums[5] = {1, 2, 3, 4, 5};
-// Recall that arrays a pointer to a single element. When you print, you are printing the memory address
+// Recall that arrays a pointer to a single element. You are printing the memory address.
 printf("%d\n", nums);
 // You can only print one item at a time, this prints the first one.
 printf("%d\n", *nums);
 ```
 
 ```
-some ugly numbers
+-9999999999999 // or whatever ugly numbers your program wants to use
 1
 ```
-Unlike variables in python, you can't have items of different types in an array
-in C.
+You can only access the items in an array one by one, so you will have to print them
+by looping through them.
+
+## Iteration
+
+```c
+int max = 5;
+int i;
+for (i = 0; i < max; i++)
+{
+    printf("d\n", i);
+}
+```
+
 
 
 ## String Operations 

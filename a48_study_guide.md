@@ -33,11 +33,41 @@ int main()
 {
   float my_float = 10.0;
   int my_int = 3;
-  char my_char 'a';
+  char my_char = 'a';
   printf("My variables are: %f, %d, %c \n", my_float, my_int, my_char);
   return 0;
 }
 ```
+## Arrays
+
+An indexable collection of data. Recall that you must declare:
+1. the size of the array
+2. what type the items are
+
+```c
+// initializes an empty array of 5 integers. 
+int numbers[5];
+// initializes an empty array of characters (aka a string)
+char letters[5];
+// initializes a 2d array
+int numbers3d[2][3];
+```
+```c
+int nums[5] = {1, 2, 3, 4, 5};
+// Recall that arrays a pointer to a single element. When you print, you are printing the memory address
+printf("%d\n", nums);
+// You can only print one item at a time, this prints the first one.
+printf("%d\n", *nums);
+```
+
+```
+some ugly numbers
+1
+```
+Unlike variables in python, you can't have items of different types in an array
+in C.
+
+
 ## String Operations 
 
 ### Strings in C

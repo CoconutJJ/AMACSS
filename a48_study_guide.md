@@ -54,40 +54,65 @@ operations like printf.
 ~~~c
 char a[10], b[10];
 strcpy(a, "Hello");
-printf(a);
-printf(b);
-printf("Copying first four letters of A to b");
+printf("%s\n", a);
+printf("Copying first four letters of a to b\n");
 strncpy(b, a, 4);
-printf(b);
+printf("%s\n", b);
 ~~~
 ```
 Hello
-Hello
+Copying first four letters of a to b
 Hell
 ```
-`strcat`
+#### `strcat and strncat`
 ~~~c
-char a[10], b[10]
+char a[10], b[10];
+strcpy(a, "Hello");
+strcpy(b, "World");
+strcat(a, b); 
+printf("%s\n", a);
+printf("concatenating first 7 letters of a to b\n");
+strncat(b, a, 7); 
+printf("%s\n", b);
+~~~
 
+```
+HelloWorld                                                                   
+concatenating first 7 letters of a to b                                      
+WorldHelloWo 
+```
+
+#### `strcmp and strncmp`
+~~~c
+char a[10], b[10];
+strcpy(a, "Word");
+strcpy(b, "World");
+// if the words are equal, strcmp will return 0
+if (strcmp(a, b) == 0)
+{
+    printf("%s and %s are equal\n", a, b);
+}
+else
+{
+    printf("%s and %s are not equal\n", a, b);
+}
+int n = 3;
+if (strncmp(a, b, n) == 0)
+{
+    printf("%s and %s are equal to %d bytes\n", a, b, n);
+}
+else
+{
+    printf("%s and %s are not equal\n", a, b, n);
+}
 
 ~~~
 
+```
+Word and World are not equal                                               
+Word and World are equal to 3 bytes 
+```
 
-`strncat`
-~~~c
-
-~~~
-
-
-`strcmp`
-~~~c
-
-~~~
-
-`strncmp`
-~~~c
-
-~~~
 ---
 
 ## Section 1: Pointers

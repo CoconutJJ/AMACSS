@@ -49,8 +49,24 @@ operations like printf.
 
 `string.h` library
 
+`strcpy`
+
+~~~c
+char a[10], b[10];
+strcpy(a, "Hello")
+strcpy(b, a);
+printf(a);
+print(b);
+~~~
+#### Output
+```
+Hello
+Hello
+```
 `strcat`
 ~~~c
+char a[10], b[10]
+
 
 ~~~
 

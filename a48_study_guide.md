@@ -19,6 +19,8 @@ int main()
   return 0;
 }
 ```
+## Compiling, Running and Makefiles
+
 
 The fundamental data types supported by C are:
 1. `int` which is an integer number,
@@ -53,22 +55,35 @@ int numbers[5];  // doing int numbers[5] = {} initializes all values to 0
 // array of chars (string)
 char letters[5]; // doing int letters[5] = {} initiliazes all values to ''
 // initializes a 2d array
-int numbers3d[2][3];
+int numbers3d[2][3]; // think "Arrays of Arrays" or "LISTS of LISTS in Python"
 ```
 ```c
+// you can set the values of your array directly.
 int nums[5] = {1, 2, 3, 4, 5};
+// same for a 2d array
+int matrix[3][3] = {{1,2,3},{4,5,6},{7,8,9}};
 // Recall that arrays a pointer to a single element. You are printing the memory address.
 printf("%d\n", nums);
-// You can only print one item at a time, this prints the first one.
-printf("%d\n", *nums);
+
+printf("%d\n", *nums); // You can only print one item at a time, this prints the first one.
+printf("%d\n", nums[3]); // print an item at an index
+printf("%d\n", matrix[1][2]); // should give 6
+nums[3] = 2; // change value at an index
+printf("%d\n", nums[3]); // used to be 4 now should be 2
+
+
 ```
 
 ```
 -9999999999999 // or whatever ugly numbers your program wants to use
 1
+4
+6
+2
 ```
 You can only access the items in an array one by one, so you will have to print them
-by looping through them.
+by looping through them. This is unlike python where you can just ```print(List)``` and
+the entire List will print for you.
 
 ## Iteration Over an Array
 

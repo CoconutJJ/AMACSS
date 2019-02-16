@@ -22,6 +22,8 @@ int main()
 ## Compiling, Running and Makefiles
 
 
+## Data Types
+
 The fundamental data types supported by C are:
 1. `int` which is an integer number,
 2. `float/double`, a floating point number

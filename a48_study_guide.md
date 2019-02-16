@@ -48,10 +48,10 @@ Unlike variables in python, you can't have items of different types in an array
 in C.
 
 ```c
-// initializes an empty array of 5 integers. 
-int numbers[5];
-// initializes an empty array of characters (aka a string)
-char letters[5];
+// array of ints
+int numbers[5];  // doing int numbers[5] = {} initializes all values to 0
+// array of chars (string)
+char letters[5]; // doing int letters[5] = {} initiliazes all values to ''
 // initializes a 2d array
 int numbers3d[2][3];
 ```
@@ -70,18 +70,40 @@ printf("%d\n", *nums);
 You can only access the items in an array one by one, so you will have to print them
 by looping through them.
 
-## Iteration
+## Iteration Over an Array
 
 ```c
-int max = 5;
+int nums[5] = {1, 2, 3, 4, 5};
+// you can get array length by dividing total size by size of the type used
+int length = sizeof(nums)/sizeof(int); // in this case total size = 20, int size = 4
+
+// both of the loops below do the same thing
+// indexed for loop 
 int i;
-for (i = 0; i < max; i++)
+for (i = 0; i < length; i++) // Python Equivalent: for i in range(0, length, 1):
 {
-    printf("d\n", i);
+  printf("%d\n", nums[i]);    
 }
+
+// while loop
+int i = 0;
+while (i < length)
+{
+  printf("%d\n", nums[i]); 
+  i ++;   
+}
+
+```
+```
+BOTH OUTPUT:
+01234
 ```
 
-
+Notice, we didn't do `for (int i = 0; ...)` which you may be familiar with doing in
+Java or C# or some C based related language. This doesn't work unless you add `-std=c99`
+(c version 99) in gcc. You should initialize the i just to be safe. C does not have
+a "for-each" (equivalent for `for item in items`) implementation, but you can accomplish
+what you need with the index for loop.
 
 ## String Operations 
 

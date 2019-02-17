@@ -18,7 +18,11 @@ int main()
   // your main function must return 0 if successful
   return 0;
 }
-~~~
+```
+## Compiling, Running and Makefiles
+
+
+## Data Types
 
 The fundamental data types supported by C are:
 1. `int` which is an integer number,
@@ -33,11 +37,93 @@ int main()
 {
   float my_float = 10.0;
   int my_int = 3;
-  char my_char 'a';
+  char my_char = 'a';
   printf("My variables are: %f, %d, %c \n", my_float, my_int, my_char);
   return 0;
 }
-~~~
+```
+## Arrays
+
+An indexable collection of data. Recall that you must declare:
+1. the size of the array
+2. what type the items are
+
+Unlike variables in Python, you can't have items of different types in an array
+in C. 
+i.e In Python, you can have a list `L = [0, 'hi', [2, 1, 1], {'s':3}]`
+whereas in C, every item in array must be the same type.
+
+```c
+// array of ints
+int numbers[5];  // doing int numbers[5] = {} initializes all values to 0
+// array of chars (string)
+char letters[5]; // doing int letters[5] = {} initiliazes all values to ''
+// initializes a 2d array
+int numbers3d[2][3]; // think "Arrays of Arrays" or "LISTS of LISTS in Python"
+```
+```c
+// you can set the values of your array directly.
+int nums[5] = {1, 2, 3, 4, 5};
+// same for a 2d array
+int matrix[3][3] = {{1,2,3},{4,5,6},{7,8,9}};
+// Recall that arrays a pointer to a single element. You are printing the memory address.
+printf("%d\n", nums);
+
+printf("%d\n", *nums); // You can only print one item at a time, this prints the first one.
+printf("%d\n", nums[3]); // print an item at an index
+printf("%d\n", matrix[1][2]); // should give 6
+nums[3] = 2; // change value at an index
+printf("%d\n", nums[3]); // used to be 4 now should be 2
+
+
+```
+
+```
+-9999999999999 // or whatever ugly numbers your program wants to use
+1
+4
+6
+2
+```
+You can only access the items in an array one by one, so you will have to print them
+by looping through them. This is unlike python where you can just ```print(List)``` and
+the entire List will print for you.
+
+## Iteration Over an Array
+
+```c
+int nums[5] = {1, 2, 3, 4, 5};
+// you can get array length by dividing total size by size of the type used
+int length = sizeof(nums)/sizeof(int); // in this case total size = 20, int size = 4
+
+// both of the loops below do the same thing
+// indexed for loop 
+int i;
+for (i = 0; i < length; i++) // Python Equivalent: for i in range(0, length, 1):
+{
+  printf("%d\n", nums[i]);    
+}
+
+// while loop
+int i = 0;
+while (i < length)
+{
+  printf("%d\n", nums[i]); 
+  i ++;   
+}
+
+```
+```
+BOTH OUTPUT:
+01234
+```
+
+Notice, we didn't do `for (int i = 0; ...)` which you may be familiar with doing in
+Java or C# or some C based related language. This doesn't work unless you add `-std=c99`
+(c version 99) in gcc. You should initialize the i just to be safe. C does not have
+a "for-each" (equivalent for `for item in items`) implementation, but you can accomplish
+what you need with the index for loop.
+
 ## String Operations 
 
 ### Strings in C
@@ -49,30 +135,70 @@ operations like printf.
 
 `string.h` library
 
-`strcat`
+#### `strcpy and strncpy`
 
 ~~~c
+char a[10], b[10];
+strcpy(a, "Hello");
+printf("%s\n", a);
+printf("Copying first four letters of a to b\n");
+strncpy(b, a, 4);
+printf("%s\n", b);
+~~~
+```
+Hello
+Copying first four letters of a to b
+Hell
+```
+#### `strcat and strncat`
+~~~c
+char a[10], b[10];
+strcpy(a, "Hello");
+strcpy(b, "World");
+strcat(a, b); 
+printf("%s\n", a);
+printf("concatenating first 7 letters of a to b\n");
+strncat(b, a, 7); 
+printf("%s\n", b);
+~~~
 
+```
+HelloWorld                                                                   
+concatenating first 7 letters of a to b                                      
+WorldHelloWo 
+```
+
+#### `strcmp and strncmp`
+~~~c
+char a[10], b[10];
+strcpy(a, "Word");
+strcpy(b, "World");
+// if the words are equal, strcmp will return 0
+if (strcmp(a, b) == 0)
+{
+    printf("%s and %s are equal\n", a, b);
+}
+else
+{
+    printf("%s and %s are not equal\n", a, b);
+}
+int n = 3;
+if (strncmp(a, b, n) == 0)
+{
+    printf("%s and %s are equal to %d bytes\n", a, b, n);
+}
+else
+{
+    printf("%s and %s are not equal\n", a, b, n);
+}
 
 ~~~
 
+```
+Word and World are not equal                                               
+Word and World are equal to 3 bytes 
+```
 
-`strncat`
-
-~~~c
-
-~~~
-
-
-`strcmp`
-~~~c
-
-~~~
-
-`strncmp`
-~~~c
-
-~~~
 ---
 
 ## Section 1: Pointers

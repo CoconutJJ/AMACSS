@@ -25,7 +25,7 @@ HELLO WORLD
 ```
 ### Compiling, Running and Makefiles
 
-Assuming you already have ** GNU Compiler Collection (gcc) ** installed, you can
+Assuming you already have **GNU Compiler Collection (gcc)** installed, you can
 compile your code (in this case, `hello.c` by doing:
 ```
 gcc hello.c

@@ -19,7 +19,26 @@ int main()
   return 0;
 }
 ~~~
-## Compiling, Running and Makefiles
+```
+HELLO WORLD
+
+```
+### Compiling, Running and Makefiles
+
+Assuming you already have ** GNU Compiler Collection (gcc) ** installed, you can
+compile your code (in this case, ```hello_world.c``` by doing:
+```
+gcc hello_world.c
+```
+By default, this will make an executable in Windows called **a.exe** and on linux **a.out**.
+
+You can specify the name by doing:
+```
+gcc -o hello hello_world.c
+```
+This can get tedious if you have to compile 1000s of files over and over.
+You can resolve this issue by making a ```Makefile```
+
 
 
 ## Data Types

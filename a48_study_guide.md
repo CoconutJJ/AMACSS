@@ -7,7 +7,7 @@ start at a function called  `main()`. Program can include and use code from
 **libraries**, similar to Python modules. Here is an example of the most famous
 program in C.
 
-```c
+~~~c
 // Allows you to use input and output command such as printf
 #include <stdio.h>
 
@@ -18,7 +18,7 @@ int main()
   // your main function must return 0 if successful
   return 0;
 }
-```
+~~~
 
 The fundamental data types supported by C are:
 1. `int` which is an integer number,
@@ -26,7 +26,7 @@ The fundamental data types supported by C are:
 3. `char` which is one character and 
 4. `void` which represents no data type attached like `None` in Python.
 
-```c
+~~~c
 #include <stdio.h>
 
 int main()
@@ -37,25 +37,28 @@ int main()
   printf("My variables are: %f, %d, %c \n", my_float, my_int, my_char);
   return 0;
 }
-```
+~~~
 ## String Operations 
 
 ### Strings in C
 
 Recall that strings in C are not primitive. Strings are an **array of
-characters**, which is terminated with a **null character** ```\0```. You must
+characters**, which is terminated with a **null character** ~~~\0~~~. You must
 end your strings with the null character or else you won't be able to perform
 operations like printf.
 
 `string.h` library
 
 `strcat`
+
 ~~~c
+
 
 ~~~
 
 
 `strncat`
+
 ~~~c
 
 ~~~
@@ -97,6 +100,7 @@ interpreted as an `int`, `char*` or any other data type.
 
 We can let the compiler know we've decided to switch our interpretation of the
 data we stored in a variable. It's called casting
+
 ~~~c
 int main(int argc, char ** argv) {
     
@@ -109,6 +113,7 @@ int main(int argc, char ** argv) {
     printf("%d", *p);
 }
 ~~~
+
 ~~~
 $ gcc casting.c
 $ ./a.out
@@ -157,6 +162,7 @@ of the pointer. (the memory address it holds)
 ### Common Mistakes and Bugs
 
 **Uninitialized Pointer - Dereferenced before assignment**
+
 ~~~ c
 int main(int argc, char ** argv) {
     
@@ -168,6 +174,7 @@ int main(int argc, char ** argv) {
 ~~~
 
 **Dangling Pointer - Access**
+
 ~~~ c
 int main(int argc, char ** argv) {
     
@@ -181,6 +188,7 @@ int main(int argc, char ** argv) {
 ~~~
 
 **Memory Leak**
+
 ~~~ c
 int main(int argc, char ** argv) {
     
@@ -195,10 +203,17 @@ int main(int argc, char ** argv) {
 }
 ~~~
 
+### Difference between Pointers and Arrays
+
+### Array Pointer Decay
+
+
+
 ### Dereferencing a pointer and overwriting the value
 
 
 
+## Structs
 
 ---
 
@@ -217,7 +232,7 @@ Let's review some of the basic operations:
 
 
 Let's first define our Node `struct` 
-```c
+~~~c
 typedef struct __node__ Node; // don't worry about this, this is called
                               // prototyping. It's so we can use the
                               // typedef keyword `Node` in our Node struct
@@ -227,12 +242,13 @@ typedef struct __node__ {
     int v;
     Node * next 
 } Node;
-```
+~~~
 
 ### `INSERT(head,k)`
 Note the double pointer to head allows us to change the head node pointer by
 dereferencing.
-```c
+
+~~~c
 /**
  * Inserts the Node k into the beginning linked list head.
  */ 
@@ -260,12 +276,13 @@ void insert (Node** head, Node* k) {
     // set the next to our new node.
     curr->next = k;
 }   
-```
+~~~
 
 ### `DELETE(head,v)` 
 Delete is slightly more complicated as we have to consider the edge cases where
 the node is the head of the list and the end of the list
-```c
+
+~~~c
 /**
  * Deletes Node with value v from linked list head
  * Returns 0 if node with value v is not found, 1 otherwise
@@ -308,15 +325,18 @@ int delete (Node** head, int v) {
     free(curr)
     return 1;
 }
-```
+~~~
 ### Exercises
 
 1. Write a function `void llreverse(Node** head)`, that reverses the linked
    list rooted at `head`.
-2. 
+2. Implement Bubble Sort in C using a `int[]`
+3. Write a 
+
 ---
-Questions, Comments and Suggestions can be directed to me at
-[david.yue@mail.utoronto.ca](mailto:david.yue@mail.utoronto.ca)
+Questions, Comments and Suggestions can be directed to either
+
+Tabeeb Yeamin or David Yue 
 
 We are also your CSC A48 Computer Science Representatives for AMACSS, feel free
 to ask course material questions through this email as well :)

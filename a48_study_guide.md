@@ -26,21 +26,43 @@ HELLO WORLD
 ### Compiling, Running and Makefiles
 
 Assuming you already have ** GNU Compiler Collection (gcc) ** installed, you can
-compile your code (in this case, ```hello_world.c``` by doing:
+compile your code (in this case, `hello.c` by doing:
 ```
-gcc hello_world.c
+gcc hello.c
 ```
 By default, this will make an executable in Windows called **a.exe** and on linux **a.out**.
 
 You can specify the name by doing:
 ```
-gcc -o hello hello_world.c
+gcc -o hello hello.c
 ```
 This can get tedious if you have to compile 1000s of files over and over.
-You can resolve this issue by making a ```Makefile```
+You can resolve this issue by making a `Makefile`. Make a file called
+"Makefile" no extensions or anything.
 
+Makefiles are of the form:
+```
+target: dependencies
+  action // important that you tab properly, it's whitespace sensitive
+```
+To compile the other program, we need to make this
+```
+// This is for creating the hello executable
+hello: hello.o           // run action when hello.o has changed
+	gcc hello.o -o hello   // recompile the hello.o into a hello executable
 
+// This is for creating the hello object file
+hello.o: hello.c // run when hello.c changes
+	gcc -c hello.c // compile the hello.c into an object file
+                 // (-c replaces the .c with a .o extension)
 
+clean:           // no dependencies
+	rm *.o hello   // remove anything that ends in .o and
+                 // and the executable we create each time
+```
+Now you just need to type `make` from the terminal and your project
+will compile everytime. You can add as many files as you want to your
+Makefile and save yourself the headache of having to write out all the names.
 ## Data Types
 
 The fundamental data types supported by C are:

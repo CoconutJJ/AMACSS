@@ -48,8 +48,9 @@ An indexable collection of data. Recall that you must declare:
 1. the size of the array
 2. what type the items are
 
-Unlike variables in python, you can't have items of different types in an array
-in C.
+Unlike variables in Python, you can't have items of different types in an array
+in C. i.e In Python, you can have a list `L = [0, 'hi', [2, 1, 1], {'s':3}]`
+whereas in C, every item in array must be the same type.
 
 ```c
 // array of ints

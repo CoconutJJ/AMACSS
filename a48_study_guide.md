@@ -18,7 +18,7 @@ int main()
   // your main function must return 0 if successful
   return 0;
 }
-```
+~~~
 ## Compiling, Running and Makefiles
 
 
@@ -41,7 +41,8 @@ int main()
   printf("My variables are: %f, %d, %c \n", my_float, my_int, my_char);
   return 0;
 }
-```
+~~~
+
 ## Arrays
 
 An indexable collection of data. Recall that you must declare:
@@ -53,15 +54,15 @@ in C.
 i.e In Python, you can have a list `L = [0, 'hi', [2, 1, 1], {'s':3}]`
 whereas in C, every item in array must be the same type.
 
-```c
+~~~c
 // array of ints
 int numbers[5];  // doing int numbers[5] = {} initializes all values to 0
 // array of chars (string)
 char letters[5]; // doing int letters[5] = {} initiliazes all values to ''
 // initializes a 2d array
 int numbers3d[2][3]; // think "Arrays of Arrays" or "LISTS of LISTS in Python"
-```
-```c
+~~~
+~~~c
 // you can set the values of your array directly.
 int nums[5] = {1, 2, 3, 4, 5};
 // same for a 2d array
@@ -76,22 +77,22 @@ nums[3] = 2; // change value at an index
 printf("%d\n", nums[3]); // used to be 4 now should be 2
 
 
-```
+~~~
 
-```
+~~~
 -9999999999999 // or whatever ugly numbers your program wants to use
 1
 4
 6
 2
-```
+~~~
 You can only access the items in an array one by one, so you will have to print them
-by looping through them. This is unlike python where you can just ```print(List)``` and
+by looping through them. This is unlike python where you can just `print(List)` and
 the entire List will print for you.
 
 ## Iteration Over an Array
 
-```c
+~~~c
 int nums[5] = {1, 2, 3, 4, 5};
 // you can get array length by dividing total size by size of the type used
 int length = sizeof(nums)/sizeof(int); // in this case total size = 20, int size = 4
@@ -112,11 +113,11 @@ while (i < length)
   i ++;   
 }
 
-```
-```
+~~~
+~~~
 BOTH OUTPUT:
 01234
-```
+~~~
 
 Notice, we didn't do `for (int i = 0; ...)` which you may be familiar with doing in
 Java or C# or some C based related language. This doesn't work unless you add `-std=c99`
@@ -129,7 +130,7 @@ what you need with the index for loop.
 ### Strings in C
 
 Recall that strings in C are not primitive. Strings are an **array of
-characters**, which is terminated with a **null character** ~~~\0~~~. You must
+characters**, which is terminated with a **null character** `\0`. You must
 end your strings with the null character or else you won't be able to perform
 operations like printf.
 
@@ -145,15 +146,19 @@ printf("Copying first four letters of a to b\n");
 strncpy(b, a, 4);
 printf("%s\n", b);
 ~~~
-```
+~~~
 Hello
 Copying first four letters of a to b
 Hell
-```
+~~~
 #### `strcat and strncat`
+<!-- 
+CORRECTION: strcat(a,b) takes up all 10 character slots.
+No space for \0 - David
+-->
 ~~~c
 char a[10], b[10];
-strcpy(a, "Hello");
+strcpy(a, "Hello"); 
 strcpy(b, "World");
 strcat(a, b); 
 printf("%s\n", a);
@@ -162,11 +167,11 @@ strncat(b, a, 7);
 printf("%s\n", b);
 ~~~
 
-```
+~~~
 HelloWorld                                                                   
 concatenating first 7 letters of a to b                                      
 WorldHelloWo 
-```
+~~~
 
 #### `strcmp and strncmp`
 ~~~c
@@ -194,10 +199,10 @@ else
 
 ~~~
 
-```
+~~~
 Word and World are not equal                                               
 Word and World are equal to 3 bytes 
-```
+~~~
 
 ---
 
@@ -330,6 +335,8 @@ int main(int argc, char ** argv) {
 ~~~
 
 ### Difference between Pointers and Arrays
+
+
 
 ### Array Pointer Decay
 

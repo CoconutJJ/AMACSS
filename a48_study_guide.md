@@ -19,10 +19,10 @@ int main()
   return 0;
 }
 ~~~
-## Compiling, Running and Makefiles
+### Compiling, Running and Makefiles
 
 
-## Data Types
+### Data Types
 
 The fundamental data types supported by C are:
 1. `int` which is an integer number,
@@ -43,15 +43,14 @@ int main()
 }
 ~~~
 
-## Arrays
+### Arrays
 
 An indexable collection of data. Recall that you must declare:
 1. the size of the array
 2. what type the items are
 
 Unlike variables in Python, you can't have items of different types in an array
-in C. 
-i.e In Python, you can have a list `L = [0, 'hi', [2, 1, 1], {'s':3}]`
+in C. i.e In Python, you can have a list `L = [0, 'hi', [2, 1, 1], {'s':3}]`
 whereas in C, every item in array must be the same type.
 
 ~~~c
@@ -86,11 +85,11 @@ printf("%d\n", nums[3]); // used to be 4 now should be 2
 6
 2
 ~~~
-You can only access the items in an array one by one, so you will have to print them
-by looping through them. This is unlike python where you can just `print(List)` and
-the entire List will print for you.
+You can only access the items in an array one by one, so you will have to print
+them by looping through them. This is unlike python where you can just
+`print(List)` and the entire List will print for you.
 
-## Iteration Over an Array
+### Iteration Over an Array
 
 ~~~c
 int nums[5] = {1, 2, 3, 4, 5};
@@ -119,19 +118,19 @@ BOTH OUTPUT:
 01234
 ~~~
 
-Notice, we didn't do `for (int i = 0; ...)` which you may be familiar with doing in
-Java or C# or some C based related language. This doesn't work unless you add `-std=c99`
-(c version 99) in gcc. You should initialize the i just to be safe. C does not have
-a "for-each" (equivalent for `for item in items`) implementation, but you can accomplish
-what you need with the index for loop.
+Notice, we didn't do `for (int i = 0; ...)` which you may be familiar with doing
+in Java or C# or some C based related language. This doesn't work unless you add
+`-std=c99` (c version 99) in gcc. You should initialize the i just to be safe. C
+does not have a "for-each" (equivalent for `for item in items`) implementation,
+but you can accomplish what you need with the index for loop.
 
-## String Operations 
+## Section 1: String Operations 
 
 ### Strings in C
 
 Recall that strings in C are not primitive. Strings are an **array of
-characters**, which is terminated with a **null character** `\0`. You must
-end your strings with the null character or else you won't be able to perform
+characters**, which is terminated with a **null character** `\0`. You must end
+your strings with the null character or else you won't be able to perform
 operations like printf.
 
 `string.h` library
@@ -153,8 +152,7 @@ Hell
 ~~~
 #### `strcat and strncat`
 <!-- 
-CORRECTION: strcat(a,b) takes up all 10 character slots.
-No space for \0 - David
+CORRECTION: strcat(a,b) takes up all 10 character slots. No space for \0 - David
 -->
 ~~~c
 char a[10], b[10];
@@ -206,21 +204,13 @@ Word and World are equal to 3 bytes
 
 ---
 
-## Section 1: Pointers
-
-<!--
-    I would like to provide a overview of how data is stored and moved around
-    in the computer. Although feels like it isn't a review anymore, but I'm
-    writing this to someone who's new to the material
--->
+## Section 2: Pointers
 
 Any programming language at its very heart is about storing and moving
 information around. In fact, to your computer, there is no difference between an
 `int` or `char` or even `char*` etc., they are simply a sequence of bits that
 are passed around in your machine. 
 
-
-<!-- Sounds a little philosophical...-->
 It is the human component and only this component that makes the decision that
 an `int` expresseses our idea of quantity or number and `char` expresses our
 idea of characters. If you were to "ask" your computer what is stored at a
@@ -254,20 +244,11 @@ Size of Integer: 4 bytes
 > Note: Since the size of integer is only 4 bytes, not all of "Hello World" has
 been translated to a integer value. only the first 4 bytes.
 
-<!-- 
-    Feels like I'm trying to introduce a new concept... probably shouldn't
-    be doing that. But I also want to be clear just how
--->
 The point being, **memory isn't specifically "formatted" to store your requested
 data type**. An `int` is stored in the same way as a `char`,`char*`, `double`
 etc. - a sequence of bytes. A data type simply defines how many bytes we should
 read starting from a location.
 
-
-<!--
-    The previous paragraphs is the attempt to the set the stage for this idea 
-    below
--->
 Pointers in C are like any other datatype. When declaring a pointer, your
 computer simply allocates 8 bytes in memory to store a sequence of 8 bytes. It
 is us who decided to first interpret these 8 bytes as a number then as a memory
@@ -280,15 +261,6 @@ inside your function, specifically parameters, and go out of scope when the
 function returns. The same logic is true for returning a value from a function,
 the value is copied and sent back to the caller.
 
-Passing in a pointer into a function has **absolutely no difference**, the value
-the pointer holds (i.e the 8 bytes that store the memory address) are copied and
-stored as a local variable in the function (i.e your parameter). Failure to
-distinguish the above ideas about copy on pass and copy on return leads to main
-source of confusion about pointers. People tend to think that pointers are
-passed to function in a special way - **they are not**. They are done in the
-exact same way an `int` or `char` etc. would be passed in. It's just that one has
-to realize its not what the pointer is pointing to that is passed, but the value
-of the pointer. (the memory address it holds)
 
 ### Common Mistakes and Bugs
 
@@ -299,7 +271,7 @@ int main(int argc, char ** argv) {
     
     int * p;
 
-    *p = 3; // BAD! p doesn't point to a valid location location in memory.
+    *p = 3; // BAD! p doesn't point to a valid location in memory.
             // Attempting to write will trigger SIGSEGV
 }
 ~~~
@@ -336,23 +308,148 @@ int main(int argc, char ** argv) {
 
 ### Difference between Pointers and Arrays
 
+Arrays and Pointers are similar in how they access memory. But their key
+difference lies in how they act and the operations you can perform on the two.
 
+~~~c
+int arr[3]; // allocates space on the stack for 3 integers
+
+arr[0] = 5; // assigns the first element in the array to 5
+
+printf("Indexed Value: %d\n", arr[0]);
+printf("Dereferenced Value: %d\n", *arr);
+
+~~~
+The two expressions will both yield the first value of the array.
+
+~~~
+$ gcc array.c
+$ ./a.out
+Indexed Value: 5
+Dereferenced Value: 5
+~~~
+
+However, unlike declaring a `int *arr`, we cannot reassign `arr` to another
+value. In other words, arrays behave very much like a pointer, but is NOT a
+pointer.
+
+~~~c
+int p[10];
+int d = 9;
+p = &d; // illegal, gcc will complain.
+~~~
 
 ### Array Pointer Decay
 
+When an array is passed into a function, it is said to decay into a pointer to
+the first element.
 
+~~~c
+void f(int * p) {
+    
+    p[0] = 10; // legal!
+
+    int d = 5;
+    p = &d; // reassignment is also legal :)
+}
+
+int main(int argc, char ** argv) {
+    int r[10];
+
+    f(r);
+}
+~~~
+
+If you understand that all parameters passed into a function are copied, this
+makes perfect sense! Calling `f(r)` copies the address of the first element in
+the array `r` and passes it into `f()`. 
 
 ### Dereferencing a pointer and overwriting the value
 
+We can also dereference a pointer and overwrite the value at the location it's
+pointing to. This allows us to change the value of variables inside a function
+implicitly or simply later in the code.
+
+~~~c
+void lie(int * age) {
+    *age = 19;
+}
+
+int age = 10;
+// here age == 10
+lie(&age);
+// here age == 19
+if (age >= 19) {
+    printf("You are allowed to drink alcohol")
+} else {
+    printf("You are too young!")
+}
+
+~~~
 
 
-## Structs
+## Section 3: Structs
+
+Structs in C allow us to define a new data type similar to the `class` keyword
+in Python. However, C being a much lower level language than Python, does not
+offer a lot of the luxuries you have enjoyed in Python. We cannot cannot create
+methods nor specify access modifiers in our struct. 
+
+A `struct` is essentially a contiguous chunk of virtual memory used to store
+pieces of data. The number of members in the struct and their respective data
+types determine the size of the `struct`. It is important note, while the entire
+struct is stored contiguously, the members of the struct are not neccessarily
+contiguous (i.e there is sometimes padding between members). The reason for this
+is out of scope of this course, you will learn more about this in CSCC69. For
+now, it is important to remember, you should ALWAYS determine the size of a
+`struct` by using the `sizeof()` operator and not adding up the size of its
+members.
+
+~~~c
+struct Person {
+    
+    char name[MAX_NAME_LEN];
+    
+    int age;
+    
+    int birthyear;
+    int birthmonth;
+    int birthdate;
+
+    double weight;
+    double height;
+}
+
+int main(int argc, char ** argv) {
+    
+    // we can allocate a struct on the stack
+    struct Person newPerson;
+    // we can set properties
+    strcpy(newPerson.name, "David");
+    newPerson.age = 20;
+    newPerson.birthyear = 1998;
+    newPerson.birthmonth = 9;
+    newPerson.birthdate = 27;
+
+    // like wise, we can also allocate a struct Person on the heap
+    struct Person *second_person = malloc(sizeof(struct Person));
+    // to access and assign the member values, use the -> operator
+    // since we have a struct Person pointer
+    second_person->age = 10;
+    ...
+}
+~~~
+
+It is important to note that if one of the `struct` members is a pointer,
+pointing to memory allocated on the heap, you MUST FIRST free the pointer member
+first before you free the struct.
+    
 
 ---
 
-## Section 2: Linked Lists
+## Section 4: Linked Lists
 
-You will use linked lists a lot during your upper year courses. It is a very 
+You will use linked lists a lot during your upper year courses. It is a very
 fundamental data structure and mastery in manipulating linked lists is vital.
 
 A linked list comes with some basic operations as you have seen in lecture.
@@ -361,10 +458,12 @@ in Python with a class containing a `next` property. The pointers in C actually
 give us a whole new level of control. The ability of being able to create a
 pointer and dereference it somewhere later in your code is a very powerful tool.
 
-Let's review some of the basic operations:
+Let's review some of the basic operations and how this dereference operation
+will fit in:
 
 
 Let's first define our Node `struct` 
+
 ~~~c
 typedef struct __node__ Node; // don't worry about this, this is called
                               // prototyping. It's so we can use the
@@ -459,19 +558,3 @@ int delete (Node** head, int v) {
     return 1;
 }
 ~~~
-### Exercises
-
-1. Write a function `void llreverse(Node** head)`, that reverses the linked
-   list rooted at `head`.
-2. Implement Bubble Sort in C using a `int[]`
-3. Write a 
-
----
-Questions, Comments and Suggestions can be directed to either
-
-Tabeeb Yeamin or David Yue 
-
-We are also your CSC A48 Computer Science Representatives for AMACSS, feel free
-to ask course material questions through this email as well :)
-
-Requests to see this study guide in a different format are welcome :)

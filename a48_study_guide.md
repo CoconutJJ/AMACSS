@@ -19,15 +19,59 @@ int main()
   return 0;
 }
 ~~~
+~~~
+HELLO WORLD
+
+~~~
 ### Compiling, Running and Makefiles
 
+Assuming you already have **GNU Compiler Collection (gcc)** installed, you can
+compile your code (in this case, `hello.c` by doing:
+~~~
+gcc hello.c
+~~~
+By default, this will make an executable in Windows called **a.exe** and on linux **a.out**.
+
+You can specify the name by doing:
+~~~
+gcc -o hello hello.c
+~~~
+Just run it by typing `./hello` on Unix based system or `hello` on Windows. 
+This can get tedious if you have to compile 1000s of files over and over.
+You can resolve this issue by making a `Makefile`. Make a file called
+"Makefile" no extensions or anything.
+
+Makefiles are of the form:
+~~~make
+target: dependencies
+  action                # important that you tab properly, it's whitespace sensitive
+~~~
+To compile the other program, we need to make this:
+~~~make
+# This is for creating the hello executable
+hello: hello.o                                 # run action when hello.o has changed
+  gcc hello.o -o hello               # recompile the hello.o into a hello executable
+
+# This is for creating the hello object file
+hello.o: hello.c                                          # run when hello.c changes
+  gcc -c hello.c                           # compile the hello.c into an object file
+                                          # (-c replaces the .c with a .o extension)
+					  
+# Every time we compile, we need to delete the old files
+clean:                                                             # no dependencies
+  rm *.o hello                                 # remove anything that ends in .o and
+                                            # and the executable we create each time
+~~~
+Now you just need to type `make` from the terminal and your project
+will compile everytime. You can add as many files as you want to your
+Makefile and save yourself the headache of having to write out all the names.
 
 ### Data Types
 
 The fundamental data types supported by C are:
-1. `int` which is an integer number,
-2. `float/double`, a floating point number
-3. `char` which is one character and 
+1. `int` which is an integer number like 1
+2. `float` or `double`, a floating point number like 1.0
+3. `char` which is one character like 'c'
 4. `void` which represents no data type attached like `None` in Python.
 
 ~~~c
@@ -128,12 +172,15 @@ but you can accomplish what you need with the index for loop.
 
 ### Strings in C
 
-Recall that strings in C are not primitive. Strings are an **array of
-characters**, which is terminated with a **null character** `\0`. You must end
-your strings with the null character or else you won't be able to perform
+Recall that strings in C are not primitive. In order to be able to use Strings,
+you must add:
+~~~c
+#include <string.h>
+~~~
+Strings are an **array of chars**, which is terminated with a **null character** `\0`. You must
+end your strings with the null character or else you won't be able to perform
 operations like printf.
 
-`string.h` library
 
 #### `strcpy and strncpy`
 

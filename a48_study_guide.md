@@ -23,7 +23,7 @@ int main()
 HELLO WORLD
 ~~~
 
-### Compiling, Running and Makefiles
+### Compiling and Running
 
 Assuming you already have **GNU Compiler Collection (gcc)** installed, you can
 compile your code (in this case, `hello.c` by doing:
@@ -43,37 +43,8 @@ gcc -o hello hello.c
 
 Just run it by typing `./hello` on Unix based system or `hello` on Windows. This
 can get tedious if you have to compile 1000s of files over and over. You can
-resolve this issue by making a `Makefile`. Make a file called "Makefile" no
-extensions or anything.
+resolve this issue by making a `Makefile`. You will learn about these later on in the course.
 
-Makefiles are of the form:
-
-~~~make
-target: dependencies
-  action                # important that you tab properly, it's whitespace sensitive
-~~~
-
-To compile the other program, we need to make this:
-
-~~~make
-# This is for creating the hello executable
-hello: hello.o                                 # run action when hello.o has changed
-  gcc hello.o -o hello               # recompile the hello.o into a hello executable
-
-# This is for creating the hello object file
-hello.o: hello.c                                          # run when hello.c changes
-  gcc -c hello.c                           # compile the hello.c into an object file
-                                          # (-c replaces the .c with a .o extension)
-                      
-# Every time we compile, we need to delete the old files
-clean:                                                             # no dependencies
-  rm *.o hello                                 # remove anything that ends in .o and
-                                            # and the executable we create each time
-~~~
-
-Now you just need to type `make` from the terminal and your project will compile
-everytime. You can add as many files as you want to your Makefile and save
-yourself the headache of having to write out all the names.
 
 ### Data Types
 
